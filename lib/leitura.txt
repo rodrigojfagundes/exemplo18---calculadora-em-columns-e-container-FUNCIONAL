@@ -1,0 +1,369 @@
+import 'dart:ffi';
+
+import 'package:flutter/material.dart';
+
+//criando a funcao principal q é a funcao main...
+void main() {
+//ela vai chamar a funcao MeuApp que é ali q o APP vai iniciar
+  runApp(
+    MeuApp(),
+  );
+}
+
+class MeuApp extends StatefulWidget {
+  const MeuApp({Key? key}) : super(key: key);
+
+  @override
+  _MeuAppState createState() => _MeuAppState();
+}
+
+class _MeuAppState extends State<MeuApp> {
+//declarando as variaveis
+
+//na variavel t1 é possivel colocar varios numeros em sequencia SEM SOMAR eles
+//digitar varios numeros ao apertar nos botoes, sem SOMAR AUTOMATICAMENTE
+  final TextEditingController t1 = TextEditingController();
+
+  //double de 3 variaveis... Pois NAO é possivel fazer OP Matematicas com
+  //a variavel T1... Ela nao DIVIDE, SOMA, Multiplica...
+  //Entao temos q pegar o q ta salvo nela e colocar nas variaveis tipo DOUBLE
+
+  //resultado vai pegar o PRIMEIRO numero digitado ANTES de apertar no SOMA
+  double resultado = 0;
+  //resultado1 vai pegar os primeiros numeros digitados DEPOIS de apertar no SOMA
+  double resultado1 = 0;
+  //resultado2 vai ser a SOMA de RESULTADO + RESULTADO1
+  double resultado2 = 0;
+  //OPERACAO, se valor for 1 entao e SOMA, se for 2 entao é Multiplicacao, etc...
+  double operacao = 0;
+
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      //criando o esqueleto/scaffold do App
+      home: Scaffold(
+        //cor de fundo padrao do app
+        backgroundColor: Colors.yellow,
+        //todo conteudo do app vai ficar em area visivel (sem torre sinal, bateria, etc...)
+        body: SafeArea(
+          //Column é para criar uma LISTA/VETOR de containers um em baixo do outro
+          child: Column(
+            //children é o nome dado aos objetos dessa lista/vetor
+            children: [
+              //gesture detector, area de detectcao de toque na tela
+              GestureDetector(
+                //se for dado um CLICK/TOQUE
+                onTap: () {
+                  //setState permite ser alterado o valor de variavel
+                  setState(() {
+                    //adicionando o VALOR 1 aos VALORES JA EXISTENTE na variavel sem SOMAR
+                    t1.text = t1.text + "1";
+                  });
+                },
+                //criando um container, TAMANHO, COR e escrito VALOR1
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.green,
+                  child: Text('valor 1'),
+                ),
+              ),
+              //criando outra area de deteccao de toque
+              GestureDetector(
+                //se for dado 1 toque/click
+                onTap: () {
+                  //ira permitir alterar o ESTADO/VALOR da variavel
+                  setState(() {
+                    //acresentando o VALOR 2 a VARIAVEL T1... Sem SOMAR ao valor anterior
+                    t1.text = t1.text + "2";
+                  });
+                },
+                //criando container... tamanho, cor, texto...
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.red,
+                  child: Text('valor 2'),
+                ),
+              ),
+              //campo para detectar se foi tocado na tela
+              GestureDetector(
+                //se foi dado um TOQUE/CLICK
+                onTap: () {
+                  //e permitido alterar o ESTADO/VALOR da variavel T1
+                  setState(() {
+                    //adicionando o valor 3 aos valores ja existente na variavel
+                    t1.text = t1.text + "3";
+                  });
+                },
+                //container com as informacoes de tamanho, cor e texto
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.yellow,
+                  child: Text('valor 3'),
+                ),
+              ),
+              //campo para detectar se foi TOCADO/CLICADO na tela
+              GestureDetector(
+                //se foi dado UM toque apenas
+                onTap: () {
+                  //permitindo alterar o ESTADO / VALOR da variavel
+                  setState(() {
+                    //adicionando o valor 4 aos valores da variavel SEM SOMAR eles
+                    t1.text = t1.text + "4";
+                  });
+                },
+                //criando um container Tamanho, Cor, Texto
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.deepOrange,
+                  child: Text('valor 4'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    t1.text = t1.text + "5";
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.indigoAccent,
+                  child: Text('valor 5'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    t1.text = t1.text + "6";
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.lightGreen,
+                  child: Text('valor 6'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    t1.text = t1.text + "7";
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.brown,
+                  child: Text('valor 7'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    t1.text = t1.text + "8";
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.lime,
+                  child: Text('valor 8'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    t1.text = t1.text + "9";
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.blueAccent,
+                  child: Text('valor 9'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    t1.text = t1.text + "0";
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.teal,
+                  child: Text('0'),
+                ),
+              ),
+
+              //Gesture Detector para deteccao de TOQUE/CLICK
+              GestureDetector(
+                //se for clicado UMA vez
+                onTap: () {
+                  //sera PERMITIDO alterar os VALORES/ESTADOS das Variaveis
+                  setState(() {
+                    //NAO sei se é realmente nescessario este IF a baixo...
+                    //Verificando se o valor da variavel RESULTADO esta ZERADO (menor q 1)
+
+                    if (resultado < 1) {
+                      //passando o valor de T1 q ta em TEXT e nao da para fazer as OP Matematica
+                      //para a variavel RESULTADO q e do tipo DOUBLE
+                      resultado = double.parse(t1.text);
+                      //limpando os valores da variavel T1... Para usarmos para por
+                      //o outro NUMERO para fazermos a SOMA...
+                      t1.clear();
+                      //variavel OPERACAO recebe o valor 1... PQ no futuro terá um IF no
+                      //Gesture Detect do botao ===... e se Operacao = 1, entao e SOMA
+                      //se OPERACAO = 2 é multiplicacao... etc...
+                      operacao = 1;
+                    }
+                  });
+                },
+                //toda a operacao do GESTURE DETECT acima sera feita quando clicar
+                //no container a baixo com o nome de SOMAR...
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.grey,
+                  child: Text('somar'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (resultado < 1) {
+                      resultado = double.parse(t1.text);
+                      t1.clear();
+                      operacao = 2;
+                    }
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.black54,
+                  child: Text('multiplicar'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (resultado < 1) {
+                      resultado = double.parse(t1.text);
+                      t1.clear();
+                      operacao = 3;
+                    }
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.redAccent,
+                  child: Text('diminuir'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (resultado < 1) {
+                      resultado = double.parse(t1.text);
+                      t1.clear();
+                      operacao = 4;
+                    }
+                  });
+                },
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.lightBlueAccent,
+                  child: Text('dividir'),
+                ),
+              ),
+
+              //area para deteccao de toque/clique
+              GestureDetector(
+                //se for tocado uma vez
+                onTap: () {
+                  //permitindo ALTERAR o ESTADO/VALOR das variaveis a baixo
+                  setState(() {
+                    //SE o valor da variavel OPERACAO for 1, entao e para SOMAR as variaveis
+                    if (operacao == 1) {
+                      //NAO SEI se esse IF e nescessario, mas ele verifica se a VARIAVEL RESULTADO1 esta ZERADA...
+                      if (resultado1 < 1) {
+                        //pegando o valor de T1 e passando para a variavel RESULTADO1
+                        //pq T1 é .TEXT entao nao da para fazer SOMA, VEZES, ETC...
+                        //entao jogamos o valor para resultado1 que é DOUBLE, dai pode somar, vezes, etc..
+                        resultado1 = double.parse(t1.text);
+                        //a variavel RESULTADO2, irá receber a SOMA de RESULTADO + RESULTADO1
+                        //para no proximo container imprimirmos o valor re RESULTADO2... a soma
+                        resultado2 = resultado + resultado1;
+                      }
+                    }
+                    if (operacao == 2) {
+                      if (resultado1 < 1) {
+                        resultado1 = double.parse(t1.text);
+                        resultado2 = resultado * resultado1;
+                      }
+                    }
+                    if (operacao == 3) {
+                      if (resultado1 < 1) {
+                        resultado1 = double.parse(t1.text);
+                        resultado2 = resultado - resultado1;
+                      }
+                    }
+                    if (operacao == 4) {
+                      if (resultado1 < 1) {
+                        resultado1 = double.parse(t1.text);
+                        resultado2 = resultado / resultado1;
+                      }
+                    }
+                  });
+                },
+                //o codigo do Gesture Detect acima vai executar dentro de um
+                //container com o SIMBOLO/TEXT de == IGUAL
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.amber,
+                  child: Text('='),
+                ),
+              ),
+              //campo para detectar click/toque
+              GestureDetector(
+                //esse ON TAP eu criei, mas EU ACHO Q NAO PRECISAVA...
+                onTap: () {
+                  //permitir alterar valores
+                  setState(() {
+                    //fiz o CODIGO a baixo q EU ACHO q nao precisava...
+                    //mas tinha q ser colocado algo para ao clicar no container executar
+                    //e ter o resultado
+                    resultado2 = resultado2;
+                  });
+                },
+                //container ROXO q ao clicar nele ele mostra o q ta na variavel
+                //resultado2
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  color: Colors.deepPurple,
+                  child: Text(resultado2.toString()),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
